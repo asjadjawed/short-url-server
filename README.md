@@ -11,7 +11,7 @@ Backend server for URL shortening service.
 - Decoupled backend (Node.js) and frontend (React)
 - Server code organized MVC style (Can also be organized component style)
 
-## .evn Settings
+## .env Settings
 
 - dotenv: to set environment variables for development.\
   *(env variables with production settings should be setup as well)*
@@ -21,32 +21,6 @@ Backend server for URL shortening service.
   PORT=5500
   DB_CONNECTION=mongodb://localhost:27017/short-urls
   ```
-
-## MongoDB Test Instance
-
-If you have docker installed, save the following file as **docker-compose.yml**.
-
-```yml
-version: "3.1"
-services:
-  mongo:
-    image: mongo
-    restart: always
-    container_name: "my_mongodb"
-    ports:
-      - "27017:27017"
-    volumes:
-      - ./mongodb-data:/data/db
-volumes:
-  mongodb-data:
-```
-
-Then you can run the mongodb server for testing using the following command in the directory with **docker-compose.yml**:
-
-```bash
-$ docker-compose up -d
-// service running (silent mode)
-```
 
 ## Deploying Container to Heroku
 
