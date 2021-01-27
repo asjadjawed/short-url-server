@@ -2,7 +2,7 @@
 
 Backend server for URL shortening service.
 
-## About the server:
+## About the server
 
 - URL shortening service
 - Graceful shutdown of server & database
@@ -10,7 +10,7 @@ Backend server for URL shortening service.
 - Decoupled backend (Node.js) and frontend (React)
 - Server code organized MVC style (Can also be organized component style)
 
-## List of packages:
+## List of packages
 
 - cors: for front-end / back-end connection
 - dotenv: to set environment variables for development.
@@ -53,4 +53,5 @@ Then you can run the mongodb server for testing using the following command in t
 
 ```bash
 $ docker-compose up -d
+// service running (silent mode)
 ```
