@@ -4,7 +4,7 @@ import morgan from "morgan";
 import cors from "cors";
 import helmet from "helmet";
 
-import { connectDB, disconnectDB } from "./db/connect.js";
+import { connectDB, disconnectDB } from "./db/connection.js";
 
 dotenv.config(); // setting up env variables (check README.md)
 
