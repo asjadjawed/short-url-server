@@ -1,0 +1,7 @@
+version: "3"
+services:
+  short-url-server:
+    restart: always
+    build: .
+    ports:
+      - "5500:5500"
