@@ -11,9 +11,8 @@ Backend server for URL shortening service.
 - Decoupled backend (Node.js) and frontend (React)
 - Server code organized MVC style (Can also be organized component style)
 
-## List of packages
+## .evn Settings
 
-- cors: for front-end / back-end connection
 - dotenv: to set environment variables for development.\
   *(env variables with production settings should be setup as well)*
 
@@ -25,9 +24,6 @@ Backend server for URL shortening service.
   DB_USER=default
   DB_PASS=hunter2
   ```
-
-- helmet: to secure against common attacks
-- mongoose: to connect to mongodb
 
 ## MongoDB Test Instance
 
@@ -57,3 +53,11 @@ Then you can run the mongodb server for testing using the following command in t
 $ docker-compose up -d
 // service running (silent mode)
 ```
+
+## Deploying Container to Heroku
+
+Use the following steps to deploy the container to Heroku (after creating app & setting production environment variables):
+
+1. Push the Docker Image to the heroku registry: `heroku container:push web -a short--urls`
+2. Release the image: `heroku container:release web -a short--urls`
+3. Check the logs: `heroku logs --tail -a short--urls`
