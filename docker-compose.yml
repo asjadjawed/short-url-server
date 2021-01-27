@@ -4,15 +4,22 @@ services:
   short-url-server:
     restart: always
     container_name: "server"
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     ports:
       - "5500:5500"
+    volumes:
+      - /usr/src/short-url/node_modules
+      - ./:/usr/src/short-url
     depends_on:
       - "db"
   db:
     image: mongo
     restart: always
     container_name: "db"
+    logging:
+      driver: none
     ports:
       - "27017:27017"
     volumes:
