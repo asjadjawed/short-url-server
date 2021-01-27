@@ -5,6 +5,7 @@ Backend server for URL shortening service.
 ## About the server
 
 - URL shortening service
+- Uses free-tier mongodb atlas
 - Graceful shutdown of server & database
 - Security via helmet
 - Decoupled backend (Node.js) and frontend (React)
