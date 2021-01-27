@@ -6,7 +6,7 @@ import helmet from "helmet";
 
 import { connectDB, disconnectDB } from "./db/connection.js";
 
-dotenv.config(); // setting up env variables (check README.md)
+dotenv.config(); // setting up env variables (check README.md for .env file sample)
 
 // connecting to database
 connectDB()
@@ -19,9 +19,11 @@ connectDB()
 // setting up middleware
 const app = express();
 if (process.env.NODE_ENV === "development") app.use(morgan("tiny")); // setting up logger for dev env
-app.use(cors()); // to handle cors for decoupled fe-be connection
+app.use(cors()); // to handle cors for decoupled front-end // back-end connection
 app.use(helmet()); // security against common attack patterns
 app.use(express.json()); // we don't need body-parser package anymore (built-in with express)
+
+app.get("/", (_, res) => res.send("Hello, World!!!"));
 
 const server = app.listen(process.env.PORT, () =>
   console.log(`Server running on port: ${process.env.PORT}`)
@@ -58,6 +60,7 @@ server.on("connection", (connection) => {
 async function shutDown() {
   console.log("Received kill signal, shutting down gracefully");
 
+  // closing DB connection
   await disconnectDB()
     .then(() => console.log("DB connection closed"))
     .catch(console.error);
