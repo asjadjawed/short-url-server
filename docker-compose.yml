@@ -16,6 +16,6 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./temp-data:/data/db
+      - ./temp-data:/data/db # please remove the temp-data directory when done testing
 volumes:
   temp-data:
