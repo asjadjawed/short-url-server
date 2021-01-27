@@ -5,53 +5,39 @@ Backend server for URL shortening service.
 ## About the server
 
 - URL shortening service
+- Uses free-tier mongodb atlas
 - Graceful shutdown of server & database
 - Security via helmet
 - Decoupled backend (Node.js) and frontend (React)
 - Server code organized MVC style (Can also be organized component style)
 
-## List of packages
+## Development
 
-- cors: for front-end / back-end connection
-- dotenv: to set environment variables for development.
+### Using Nodemon
+
+To run dev via nodemon use the command `yarn dev`\
+*(be sure to have a local instance of mongodb running)*
+
+### Using Docker Compose
+
+To run the Docker dev environment use the command `$ docker-compose up --build`\
+*(this will run mongo and the app via docker for dev. You need docker to be installed on your system)*
+
+## .env Settings
+
+- dotenv: to set environment variables for development.\
+  *(env variables with production settings should be setup as well)*
 
   ```.env
   NODE_ENV=development
   PORT=5500
-  DB_ADDRESS=mongodb://localhost/
-  DB_NAME=short-urls
-  DB_USER=default
-  DB_PASS=hunter2
+  DB_CONNECTION=mongodb://localhost:27017/short-urls
   ```
 
-- helmet: to secure against common attacks
-- mongoose: to connect to mongodb
+## Deploying Container to Heroku
 
-## MongoDB Test Instance
+Use the following steps to deploy the container to Heroku (after creating app & setting production environment variables):
 
-If you have docker installed, save the following file as **docker-compose.yml**.
-
-```yml
-version: "3.1"
-services:
-  mongo:
-    image: mongo
-    restart: always
-    container_name: "my_mongodb"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: default
-      MONGO_INITDB_ROOT_PASSWORD: hunter2
-    ports:
-      - "27017:27017"
-    volumes:
-      - ./mongodb-data:/data/db
-volumes:
-  mongodb-data:
-```
-
-Then you can run the mongodb server for testing using the following command in the directory with **docker-compose.yml**:
-
-```bash
-$ docker-compose up -d
-// service running (silent mode)
-```
+1. Push the Docker Image to the heroku registry: `heroku container:push web -a short--urls`
+2. Release the image: `heroku container:release web -a short--urls`
+3. Check the logs: `heroku logs --tail -a short--urls`
