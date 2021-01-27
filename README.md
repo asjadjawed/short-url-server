@@ -1,2 +1,3 @@
-# shot-url-server
-A URL shortening service - Server
+# Short URL - Server
+
+Backend server for URL shortening service.
