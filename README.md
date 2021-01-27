@@ -19,10 +19,7 @@ Backend server for URL shortening service.
   ```.env
   NODE_ENV=development
   PORT=5500
-  DB_ADDRESS=mongodb://localhost/
-  DB_NAME=short-urls
-  DB_USER=default
-  DB_PASS=hunter2
+  DB_CONNECTION=mongodb://localhost:27017/short-urls
   ```
 
 ## MongoDB Test Instance
@@ -36,9 +33,6 @@ services:
     image: mongo
     restart: always
     container_name: "my_mongodb"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: default
-      MONGO_INITDB_ROOT_PASSWORD: hunter2
     ports:
       - "27017:27017"
     volumes:
