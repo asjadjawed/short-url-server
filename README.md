@@ -11,6 +11,18 @@ Backend server for URL shortening service.
 - Decoupled backend (Node.js) and frontend (React)
 - Server code organized MVC style (Can also be organized component style)
 
+## Development
+
+### Using Nodemon
+
+To run dev via nodemon use the command `yarn dev`\
+*(be sure to have a local instance of mongodb running)*
+
+### Using Docker Compose
+
+To run the Docker dev environment use the command `$ docker-compose up --build`\
+*(this will run mongo and the app via docker for dev. You need docker to be installed on your system)*
+
 ## .env Settings
 
 - dotenv: to set environment variables for development.\
