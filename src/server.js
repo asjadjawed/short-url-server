@@ -4,7 +4,17 @@ import morgan from "morgan";
 import cors from "cors";
 import helmet from "helmet";
 
+import { connectDB, disconnectDB } from "./db/connect.js";
+
 dotenv.config(); // setting up env variables (check README.md)
+
+// connecting to database
+connectDB()
+  .then(() => console.log("Connected to DB"))
+  .catch((err) => {
+    console.error(err);
+    process.exit(1); // exiting on connection error
+  });
 
 // setting up middleware
 const app = express();
@@ -45,8 +55,13 @@ server.on("connection", (connection) => {
   );
 });
 
-function shutDown() {
+async function shutDown() {
   console.log("Received kill signal, shutting down gracefully");
+
+  await disconnectDB()
+    .then(() => console.log("DB connection closed"))
+    .catch(console.error);
+
   server.close(() => {
     console.log("Closed out remaining connections");
     process.exit(0);
