@@ -13,7 +13,8 @@ Backend server for URL shortening service.
 ## List of packages
 
 - cors: for front-end / back-end connection
-- dotenv: to set environment variables for development.
+- dotenv: to set environment variables for development.\
+  *(env variables with production settings should be setup as well)*
 
   ```.env
   NODE_ENV=development
