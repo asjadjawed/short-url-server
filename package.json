@@ -13,7 +13,9 @@
     "express": "^4.17.1",
     "helmet": "^4.4.1",
     "mongoose": "^5.11.13",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nanoid": "^3.1.20",
+    "validator": "^13.5.2"
   },
   "devDependencies": {
     "eslint": "^7.18.0",
