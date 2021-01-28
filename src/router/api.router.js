@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { nanoid } from "nanoid";
 import validator from "validator";
+import normalizeUrl from "normalize-url";
 
 import { UrlModel } from "../models/Url.model.js";
 
@@ -9,30 +10,14 @@ const apiRouter = Router();
 // https://zelark.github.io/nano-id-cc/
 const nanoIdLength = 15;
 
-// Get existing urls
-apiRouter.get("/:slug", async (req, res) => {
-  const slug = req.params.slug;
-
-  try {
-    const url = await UrlModel.findOne({ slug });
-
-    if (!url) return res.status(404).json({ error: "404 - not found" });
-    else {
-      const { longUrl } = url;
-      return res.json({ slug, longUrl });
-    }
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: "Server Error!" });
-  }
-});
-
 // Make new short urls
 apiRouter.post("/create", async (req, res) => {
-  const { longUrl } = req.body;
+  let { longUrl } = req.body;
 
   if (!validator.isURL(longUrl))
-    return res.status(400).json({ error: "Invalid URL!" });
+    return res.status(400).json({ message: "Invalid URL!" });
+
+  longUrl = normalizeUrl(longUrl);
 
   try {
     const slug = nanoid(nanoIdLength);
@@ -43,7 +28,7 @@ apiRouter.post("/create", async (req, res) => {
     return res.json(url);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Server Error!" }); // in case of collision, user may retry
+    return res.status(500).json({ message: "Server Error!" }); // in case of collision, user may retry
   }
 });
 

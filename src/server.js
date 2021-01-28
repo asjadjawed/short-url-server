@@ -5,6 +5,7 @@ import cors from "cors";
 import helmet from "helmet";
 
 import { connectDB, disconnectDB } from "./db/connection.js";
+import indexRouter from "./router/index.router.js";
 import apiRouter from "./router/api.router.js";
 
 dotenv.config(); // setting up env variables (check README.md for .env file sample)
@@ -24,8 +25,9 @@ app.use(cors()); // to handle cors for decoupled front-end // back-end connectio
 app.use(helmet()); // security against common attack patterns
 app.use(express.json()); // we don't need body-parser package anymore (built-in with express)
 
+app.use("/", indexRouter);
 app.use("/api", apiRouter);
-app.use("*", (_, res) => res.status(404).json({ error: "404 - not found" }));
+app.use("*", (_, res) => res.status(404).json({ message: "404 - not found" }));
 
 const server = app.listen(process.env.PORT, () =>
   console.log(`Server running on port: ${process.env.PORT}`)
