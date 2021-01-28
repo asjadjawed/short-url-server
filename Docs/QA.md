@@ -34,7 +34,7 @@ decisions or algorithms would you devise to guarantee those properties?\
      - It should not be sequential
      - It should have unique and uniform distribution while generating from a pool
      - It should avoid abusive words
-     - It should scale and allow millions of users to generated unique urls fast, reliably without collisions in persistence layer.
+     - It should scale and allow millions of users to generated unique urls fast, reliably without collisions.
 
     Usually the algorithms used for slug generation are [MD5](https://www.wikiwand.com/en/MD5) (which may lead to collisions) or [base64](https://www.wikiwand.com/en/Base64#/URL_applications) encoding (which leads to long slugs and in some cases non-uniform distribution of character pool in basic implementations)
 
@@ -52,14 +52,12 @@ decisions or algorithms would you devise to guarantee those properties?\
 
       The collision calculation can be done [here](https://zelark.github.io/nano-id-cc/)
 
-      For this project with the slug size of 12, this can accommodate around 8-9 million users per year.\
+      For this project with the slug size of 12, this can accommodate around 8-9 million users per year i.e. approx 1000 requests per hour.\
       **~1 thousand years needed, in order to have a 1% probability of at least one collision.**
 
       The slug size can also be increased if users grow exponentially. The slugs are stored in MongoDB with a unique restriction so the DB won't allow any duplicates. The user can then generate another random slug in the very unlikely case of a collision.
 
-3. What do you feel are the limitations or vulnerabilities of your submitted
-solution? What should be done to address these limitations or
-vulnerabilities?\
+3. What do you feel are the limitations or vulnerabilities of your submitted solution? What should be done to address these limitations or vulnerabilities?\
 
      - I need to buy a custom domain, as the free-tier heroku or netlify apps are long and the aesthetics of a short-url is ruined with a long domain name, but this is a sample project.
      - The project also doesn't filter for any abusive or illegal or harmful websites that users may submit, and may lure people to harmful places. A service like [Google Safe Browsing](https://developers.google.com/safe-browsing/v4/lists) can be used.
@@ -91,7 +89,8 @@ implement to do that?\
     - Redshift can then be analyzed via various big data tools, such as Spark, Presto, Jupyter, Python Language (with its huge data analysis eco-system).
     - Real-time Dashboards and graphs can also be built using data visualization tools like D3 or tableau.
 
-    This is just an example of the various services that can be used they can be scaled up and down and discarded as per need.
+    ![Example architecture](dda.jpg)
+    This is just an example of the various services that can be used they can be scaled up and down and services added or removed as per client needs.
 
 6. We would like to prevent abuse of the service by making sure that only
 human users can submit URLs to be shortened (as opposed to spam bots
