@@ -3,11 +3,11 @@
 1. Github links & Project Brief\
   \
   **Back-end [[Link](https://github.com/asjadjawed/short-url-server)]:**\
-  The project was built using: Node.js (JavaScript) + MongoDB Atlas + Docker + Heroku. It has docker setup for dev and prod environments. The back-end is stateless and can can be horizontally scaled on any platform supporting Docker.\
+  The project was built using: Node.js (JavaScript) + MongoDB Atlas + Docker + Heroku. It has docker setup for dev and prod environments. The back-end is a REST API and can can be horizontally scaled on any platform supporting Docker.\
   \
   **Front-end [[Link](https://github.com/asjadjawed/short-url-client)]:**\
   The project was built using: React.js and deployed on Netlify. Basic UI layout with CSS sanitization. The build generates static assets that can be placed on any CDN for a highly available and cost-effective front-end solution. It is also decoupled from the back-end so can be worked on independently.\
-  *(This can also be dockerized, but with specialized build tools like Netlify for React deployment, it is easier to use these)* However, an example docker implementation of a React.js with CI/CD can be found [here](https://github.com/asjadjawed/docker-react).\
+  *(This can also be dockerized, but with specialized build tools like Netlify for React deployment, it is easier to use these)* However, an example docker implementation of a React.js with CI/CD can be found [here](https://github.com/asjadjawed/docker-react) in my repo.\
   \
   **Design Decisions:**
 
@@ -54,13 +54,13 @@ decisions or algorithms would you devise to guarantee those properties?\
       For this project with the slug size of 12, this can accommodate around 8-9 million users per year.\
       **~1 thousand years needed, in order to have a 1% probability of at least one collision.**
 
-      The slug size can also be increased if users grow exponentially.
+      The slug size can also be increased if users grow exponentially. The slugs are stored in MongoDB with a unique restriction so the DB won't allow any duplicates. The user can then generate another random slug in the very unlikely case of a collision.
 
 3. What do you feel are the limitations or vulnerabilities of your submitted
 solution? What should be done to address these limitations or
 vulnerabilities?\
 
-     - I need to buy a custom domain, as the free-tier heroku or netlify apps are long and the aesthetics of a short-url is ruined with a long domain name, but this is a sample project.\
+     - I need to buy a custom domain, as the free-tier heroku or netlify apps are long and the aesthetics of a short-url is ruined with a long domain name, but this is a sample project.
      - The project also doesn't filter for any abusive or illegal or harmful websites that users may submit, and may lure people to harmful places. A service like [Google Safe Browsing](https://developers.google.com/safe-browsing/v4/lists) can be used.
      - The randomly generated URL slugs may contain abusive words, the can be filtered and checked against dictionaries. An package example can be found [here](https://github.com/y-gagar1n/nanoid-good) for various languages.
      - Spamming of service using bots and scripting, can be mitigated by some kind of [captcha service](https://developers.google.com/recaptcha/docs/display).
@@ -87,8 +87,8 @@ implement to do that?\
     - [AWS Kinesis](https://aws.amazon.com/kinesis/) which is a highly scalable realtime data streaming services. This is where user activity and info is streamed using event driven collection.
     - The stream can than be stored into [AWS S3](https://aws.amazon.com/s3/) where simple analysis can be done using [AWS Athena](https://aws.amazon.com/athena/) or ELK stack can also be used.
     - The stream data (selectively) can also alternatively send data to a Data Warehouse service for fast access like [AWS Redshift](https://aws.amazon.com/redshift/) directly from Kinesis using [Kinesis Firehose](https://aws.amazon.com/kinesis/data-firehose/), this can also be used for S3.
-    - Redshift can then be analyzed via various big data tools, especially in Spark, Presto, Jupyter, Python.
-    - Real-time Dashboards and graphs can also be build using data visualization tools like D3 or tableau.
+    - Redshift can then be analyzed via various big data tools, such as Spark, Presto, Jupyter, Python Language (with its huge data analysis eco-system).
+    - Real-time Dashboards and graphs can also be built using data visualization tools like D3 or tableau.
 
     This is just an example of the various services that can be used they can be scaled up and down and discarded as per need.
 
