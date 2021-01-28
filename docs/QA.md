@@ -8,25 +8,25 @@
   The project was built using: Node.js (JavaScript) + MongoDB Atlas + Docker + Heroku. It has docker setup for dev and prod environments. The back-end is a REST API and can can be horizontally scaled on any platform supporting Docker.\
   \
   **Front-end [[Link](https://github.com/asjadjawed/short-url-client)]:**\
-  The project was built using: React.js and deployed on Netlify. Basic UI layout with CSS sanitization. The build generates static assets that can be placed on any CDN for a highly available and cost-effective front-end solution. It is also decoupled from the back-end so can be worked on independently.\
+  The project was built using: React.js and deployed on Netlify. Basic UI layout with CSS normalization and styled components. The build generates static assets that can be placed on any CDN for a highly available and cost-effective front-end solution. It is also decoupled from the back-end so can be worked on independently.\
   *(This can also be containerized, but with specialized build tools like Netlify for React deployment, it is easier to use these)* However, an example docker implementation of a React.js with CI/CD can be found [here](https://github.com/asjadjawed/docker-react) in my repo.\
   \
   **Design Decisions:**
 
      - Node.js with JavaScript was used as this is a preferred language by the company.
      - MongoDB cloud atlas for highly scalable and fast DB, with indexing support to deter collisions (discussed further on). Flexible Schema if we want to implement more features or vary slug size, since this data is mostly non-relational and simple.
-     - React.js (using JavaScript) for a simple client-side UI.
      - Docker for easy, flexible and consistent deployment and testing.
+     - React.js (using JavaScript) for a simple client-side UI.
+     - Styled Components for CSS in JS and easy management of CSS
      - Heroku for easy and free deployment using Docker containers
      - Netlify for specialized React.js deployment.
      - NanoID for slug generation (discussed in algorithms section)
      - Normalization of user input urls.
      - The back-end was structured MVC style (popular choice), it can also be structured component style.
-     - No caching was implemented, this can be added later.
+     - No caching was implemented, this can be added later, if there is heavy demand.
      - No need for a distributed synchronization service like Apache Zookeeper which will complicate implementation and may lead to vulnerabilities associated with a range / counter implementation. Randomization and collision concerns discussed below.
 
-2. What properties should a shortened URL possess, and what architectural
-decisions or algorithms would you devise to guarantee those properties?\
+2. What properties should a shortened URL possess, and what architectural decisions or algorithms would you devise to guarantee those properties?\
   \
   A short-url should posses the following properties:
 
@@ -70,16 +70,11 @@ decisions or algorithms would you devise to guarantee those properties?\
      - Allow for expiry of URLs. (Discussed below)
      - Allow for analytics (Discussed below)
 
-4. We would like to allow the users to specify an expiration period for the
-generated URL. How would you accommodate this feature into your
-solution?\
+4. We would like to allow the users to specify an expiration period for the generated URL. How would you accommodate this feature into your solution?\
   \
   This can be easily implemented by using [mongodb TTL indexes](https://docs.mongodb.com/manual/core/index-ttl/) in case of this solution. The front-end can be edited to provide a duration / time for when the link should expire.
 
-5. We would like to give users a real-time dashboard against each URL
-generated, which they can use to monitor analytics regarding the usage of
-that generated URL. What sort of architecture would you propose we
-implement to do that?\
+5. We would like to give users a real-time dashboard against each URL generated, which they can use to monitor analytics regarding the usage of that generated URL. What sort of architecture would you propose we implement to do that?\
   \
   Small-scale analytics can be done using the same architecture with request analysis for origin, browser, etc. 3rd-party services can also be used like Google Analytics.
   \
@@ -94,11 +89,7 @@ implement to do that?\
     ![Example architecture](dda.jpg)\
     *This is just an example of the various services that can be used they can be scaled up and down and services added or removed as per client needs.*
 
-6. We would like to prevent abuse of the service by making sure that only
-human users can submit URLs to be shortened (as opposed to spam bots
-and scripts). But we would also like to let other applications (e.g. Slack
-and Skype etc.) use our service. How do you propose we go about doing
-that?\
+6. We would like to prevent abuse of the service by making sure that only human users can submit URLs to be shortened (as opposed to spam bots and scripts). But we would also like to let other applications (e.g. Slack and Skype etc.) use our service. How do you propose we go about doing that?\
   \
   If we want to limit the service to registered users this can be achieved by having a authentication and authorization system in place.\
   For anonymous usage we can have the solve a captcha like the example given above in the text.\
