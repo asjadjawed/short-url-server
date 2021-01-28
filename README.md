@@ -1,6 +1,7 @@
 # Short URL - Server
 
-Backend server for URL shortening service.
+Backend server for URL shortening service.\
+**Project Live [[Link](https://urls-short.netlify.app/)**]
 
 ## About the server
 
