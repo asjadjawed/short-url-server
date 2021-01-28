@@ -2,6 +2,8 @@
 
 1. Github links & Project Brief\
   \
+  **Project Live [[Link](https://urls-short.netlify.app/)**]\
+  \
   **Back-end [[Link](https://github.com/asjadjawed/short-url-server)]:**\
   The project was built using: Node.js (JavaScript) + MongoDB Atlas + Docker + Heroku. It has docker setup for dev and prod environments. The back-end is a REST API and can can be horizontally scaled on any platform supporting Docker.\
   \
