@@ -9,6 +9,25 @@ const apiRouter = Router();
 // https://zelark.github.io/nano-id-cc/
 const nanoIdLength = 15;
 
+// Get existing urls
+apiRouter.get("/:slug", async (req, res) => {
+  const shortUrl = process.env.BASE_URL + req.params.slug;
+
+  if (process.env.NODE_ENV === "production" && !validator.isURL(shortUrl))
+    return res.status(500).json({ error: "Invalid URL!" });
+
+  try {
+    const url = await UrlModel.findOne({ shortUrl });
+
+    if (!url) return res.status(404).json({ error: "URL not found!" });
+    else return res.json(url);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Server Error!" });
+  }
+});
+
+// Make new short urls
 apiRouter.post("/create", async (req, res) => {
   const baseUrl = process.env.BASE_URL;
   const { longUrl } = req.body;
