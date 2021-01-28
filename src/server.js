@@ -25,7 +25,7 @@ app.use(helmet()); // security against common attack patterns
 app.use(express.json()); // we don't need body-parser package anymore (built-in with express)
 
 app.use("/api", apiRouter);
-app.get("*", (_, res) => res.status(404).json({ error: "404 - not found" }));
+app.use("*", (_, res) => res.status(404).json({ error: "404 - not found" }));
 
 const server = app.listen(process.env.PORT, () =>
   console.log(`Server running on port: ${process.env.PORT}`)
