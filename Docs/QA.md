@@ -21,7 +21,7 @@
      - Normalization of user input urls.
      - The back-end was structured MVC style (popular choice), it can also be structured component style.
      - No caching was implemented, this can be added later.
-     - No need for a distributed synchronization service like Apache Zookeper which will complicate implementation and may lead to vulnerabilities associated with a range / counter implementation. Randomization and collision concerns discussed below.
+     - No need for a distributed synchronization service like Apache Zookeeper which will complicate implementation and may lead to vulnerabilities associated with a range / counter implementation. Randomization and collision concerns discussed below.
 
 2. What properties should a shortened URL possess, and what architectural
 decisions or algorithms would you devise to guarantee those properties?\
