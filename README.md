@@ -30,7 +30,6 @@ To run the Docker dev environment use the command `$ docker-compose up --build`\
 
   ```.env
   NODE_ENV=development
-  BASE_URL=http://localhost:5500
   PORT=5500
   DB_CONNECTION=mongodb://db:27017/short-urls
   ```
