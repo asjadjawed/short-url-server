@@ -7,7 +7,7 @@
   \
   **Front-end [[Link](https://github.com/asjadjawed/short-url-client)]:**\
   The project was built using: React.js and deployed on Netlify. Basic UI layout with CSS sanitization. The build generates static assets that can be placed on any CDN for a highly available and cost-effective front-end solution. It is also decoupled from the back-end so can be worked on independently.\
-  *(This can also be dockerized, but with specialized build tools like Netlify for React deployment, it is easier to use these)* However, an example docker implementation of a React.js with CI/CD can be found [here](https://github.com/asjadjawed/docker-react) in my repo.\
+  *(This can also be containerized, but with specialized build tools like Netlify for React deployment, it is easier to use these)* However, an example docker implementation of a React.js with CI/CD can be found [here](https://github.com/asjadjawed/docker-react) in my repo.\
   \
   **Design Decisions:**
 
@@ -18,6 +18,7 @@
      - Heroku for easy and free deployment using Docker containers
      - Netlify for specialized React.js deployment.
      - NanoID for slug generation (discussed in algorithms section)
+     - Normalization of user input urls.
      - The back-end was structured MVC style (popular choice), it can also be structured component style.
      - No caching was implemented, this can be added later.
      - No need for a distributed synchronization service like Apache Zookeper which will complicate implementation and may lead to vulnerabilities associated with a range / counter implementation. Randomization and collision concerns discussed below.
