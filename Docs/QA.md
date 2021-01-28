@@ -83,14 +83,14 @@ implement to do that?\
   \
   But to design a proper highly scalable and available architecture ourselves we have to uses services like:
 
-    - [AWS Kinesis](https://aws.amazon.com/kinesis/) which is a highly scalable realtime data streaming services. This is where user activity and info is streamed using event driven collection.
+    - [AWS Kinesis](https://aws.amazon.com/kinesis/) which is a highly scalable realtime data streaming services. This is where user activity and info is streamed using event driven collection. The stream itself can also be analyzed using [AWS Lambda](https://aws.amazon.com/lambda/).
     - The stream can than be stored into [AWS S3](https://aws.amazon.com/s3/) where simple analysis can be done using [AWS Athena](https://aws.amazon.com/athena/) or ELK stack can also be used.
     - The stream data (selectively) can also alternatively send data to a Data Warehouse service for fast access like [AWS Redshift](https://aws.amazon.com/redshift/) directly from Kinesis using [Kinesis Firehose](https://aws.amazon.com/kinesis/data-firehose/), this can also be used for S3.
     - Redshift can then be analyzed via various big data tools, such as Spark, Presto, Jupyter, Python Language (with its huge data analysis eco-system).
     - Real-time Dashboards and graphs can also be built using data visualization tools like D3 or tableau.
 
-    ![Example architecture](dda.jpg)
-    This is just an example of the various services that can be used they can be scaled up and down and services added or removed as per client needs.
+    ![Example architecture](dda.jpg)\
+    *This is just an example of the various services that can be used they can be scaled up and down and services added or removed as per client needs.*
 
 6. We would like to prevent abuse of the service by making sure that only
 human users can submit URLs to be shortened (as opposed to spam bots
