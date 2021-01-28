@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 const urlSchema = new mongoose.Schema(
   {
     longUrl: { type: String, required: true },
-    shortUrl: {
+    slug: {
       type: String,
-      unique: true, // to avoid collision in some million years
+      unique: true, // to index & avoid collision in some million years
       required: true,
     },
     secret: { type: String, required: true },
